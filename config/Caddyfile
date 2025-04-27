@@ -1,0 +1,19 @@
+# Caddyfile located in ./config/
+
+localhost {
+    # Caddy automatically handles HTTPS for localhost using its internal CA.
+    log {
+        # Optional: Enable access logging within the Caddy container
+        output stdout
+        format json # or console
+    }
+
+    # Reverse proxy requests arriving at https://localhost
+    # Forward them TO -> host.docker.internal (your host machine) on port 8001
+    reverse_proxy host.docker.internal:8001
+}
+
+# You can add other blocks for other *.localhost domains if needed
+# example.localhost {
+#    reverse_proxy some_other_service:port
+# }
